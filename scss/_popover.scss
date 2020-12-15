@@ -20,8 +20,6 @@
   .popover-arrow {
     position: absolute;
     display: block;
-    width: $popover-arrow-width;
-    height: $popover-arrow-height;
     margin: 0 $popover-border-radius;
 
     &::before,
@@ -35,22 +33,26 @@
   }
 }
 
+// stylelint-disable function-disallowed-list
 .bs-popover-top {
   // Overrule margin set by popper.js
   margin-bottom: $popover-arrow-height !important; // stylelint-disable-line declaration-no-important
 
   > .popover-arrow {
-    bottom: subtract(-$popover-arrow-height, $popover-border-width);
+    top: calc(100% + #{$popover-border-width});
+    width: $popover-arrow-width;
+    height: $popover-arrow-height;
 
     &::before {
       bottom: 0;
-      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      border-width: $popover-arrow-height $popover-arrow-width / 2 0;
       border-top-color: $popover-arrow-outer-color;
+
     }
 
     &::after {
-      bottom: $popover-border-width;
-      border-width: $popover-arrow-height ($popover-arrow-width / 2) 0;
+      top: -$popover-border-width;
+      border-width: $popover-arrow-height $popover-arrow-width / 2 0;
       border-top-color: $popover-arrow-color;
     }
   }
@@ -61,7 +63,7 @@
   margin-left: $popover-arrow-height !important; // stylelint-disable-line declaration-no-important
 
   > .popover-arrow {
-    left: subtract(-$popover-arrow-height, $popover-border-width);
+    right: calc(100% + #{$popover-border-width});
     width: $popover-arrow-height;
     height: $popover-arrow-width;
     margin: $popover-border-radius 0; // make sure the arrow does not touch the popover's rounded corners
@@ -73,7 +75,7 @@
     }
 
     &::after {
-      left: $popover-border-width;
+      right: -$popover-border-width;
       border-width: ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2) 0;
       border-right-color: $popover-arrow-color;
     }
@@ -85,16 +87,16 @@
   margin-top: $popover-arrow-height !important; // stylelint-disable-line declaration-no-important
 
   > .popover-arrow {
-    top: subtract(-$popover-arrow-height, $popover-border-width);
+    top: 0;
 
     &::before {
-      top: 0;
+      bottom: 100%;
       border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
       border-bottom-color: $popover-arrow-outer-color;
     }
 
     &::after {
-      top: $popover-border-width;
+      bottom: -$popover-border-width;
       border-width: 0 ($popover-arrow-width / 2) $popover-arrow-height ($popover-arrow-width / 2);
       border-bottom-color: $popover-arrow-color;
     }
@@ -118,7 +120,7 @@
   margin-right: $popover-arrow-height !important; // stylelint-disable-line declaration-no-important
 
   > .popover-arrow {
-    right: subtract(-$popover-arrow-height, $popover-border-width);
+    left: calc(100% + #{$popover-border-width});
     width: $popover-arrow-height;
     height: $popover-arrow-width;
     margin: $popover-border-radius 0; // make sure the arrow does not touch the popover's rounded corners
@@ -130,12 +132,14 @@
     }
 
     &::after {
-      right: $popover-border-width;
+      left: -$popover-border-width;
       border-width: ($popover-arrow-width / 2) 0 ($popover-arrow-width / 2) $popover-arrow-height;
       border-left-color: $popover-arrow-color;
     }
   }
 }
+
+// stylelint-enable function-disallowed-list
 
 .bs-popover-auto {
   &[data-popper-placement^="top"] {
